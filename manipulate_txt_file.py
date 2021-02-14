@@ -2,12 +2,14 @@ import os
 import csv
 from collections import namedtuple
 # Get TxT file path
-file_path = os.curdir+'/files/Covid19_india-201004-194827.csv'
-# print(file_path)
+# file_path = os.curdir+'/files/Covid19_india-201004-194827.csv'
+file_path = os.path.join(os.getcwd(), 'files\StatewiseTestingDetails-201004-194827.csv')
+print(file_path)
 
 record = namedtuple('record', 'sno date state cured deaths confirmed')
 # Fieldnames
-fieldnames = ['sno', 'date', 'state', 'cured', 'deaths', 'confirmed']
+# fieldnames = ['sno', 'date', 'state', 'cured', 'deaths', 'confirmed']
+fieldnames = ['sno', 'date', 'state', 'total_sample', 'negative', 'positive']
 # Read the txt file
 
 with open(file_path, 'r') as f:
@@ -15,13 +17,13 @@ with open(file_path, 'r') as f:
     rec_lst = []
     for n, line in enumerate(csv.DictReader(f, fieldnames=fieldnames)):
         # Read the contents of each line
-        sno = line['sno']
-        line['sno'] = n+1
-        date = line['date']
-        state = line['state']
-        cured = line['cured']
-        deaths = line['deaths']
-        confirmed = line['confirmed']
+        sno = line[fieldnames[0]]
+        line[fieldnames[0]] = n+1
+        date = line[fieldnames[1]]
+        state = line[fieldnames[2]]
+        cured = line[fieldnames[3]]
+        deaths = line[fieldnames[4]]
+        confirmed = line[fieldnames[5]]
         # print(sno, date, state)
         # Modify the date format to YYYY-MM-DD
         if date:
@@ -39,7 +41,9 @@ with open(file_path, 'r') as f:
         # print(line)
         rec_lst.append(line)
 
-new_file_path = os.curdir+'/files/Covid19_india.csv'
+# new_file_path = os.curdir+'/files/Covid19_india.csv'
+new_file_path = os.path.join(os.getcwd(), 'files\StatewiseTestingDetails.csv')
+
 # Write the Output to a csv file using a DictWriter
 with open(new_file_path, 'w', newline='') as out_f:
     write = csv.DictWriter(out_f, delimiter=',', fieldnames=fieldnames)
