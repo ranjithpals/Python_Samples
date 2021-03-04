@@ -32,7 +32,7 @@ with open(file_path, 'r') as f:
                 date_part[2] = '2020'
             date_part[0] = date_part[0].rjust(2, '0')
             date_part[1] = date_part[1].rjust(2, '0')
-            mod_date = (date_part[2], date_part[1], date_part[0])
+            mod_date = (date_part[2], date_part[0], date_part[1])
             # Joining with '-' separator
             new_date = '-'.join(mod_date)
         # print(date)

@@ -30,6 +30,9 @@ def check_division_error(func):
     def inner(a, b):
         if b == 0:
             return 'ZeroDivisionError'
+        print('Returning the Actual Function to be executed...')
+        # This statement will just return the Function: divide(a, b) as an object,
+        # It (statement/object) does not run the divide function as such.
         return func(a, b)
     return inner
 
@@ -37,9 +40,13 @@ def check_division_error(func):
 # Divide two integers
 @check_division_error
 def divide(a, b):
+
     return a/b
 
 
+# Before divide(15, 3) is executed, the Decorator is invoked.
+# After the Decorator returns the Function Object, the print() function is going to execute the Function Object
+# Executing the print() function will return the result of the divide() function
 print(divide(15, 3))
 
 try:
