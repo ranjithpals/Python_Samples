@@ -1,2 +1,4 @@
-# Ignore virtual environment folder
+# virtual environment folder
 /venv
+# idea folder
+/.idea
