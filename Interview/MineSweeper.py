@@ -1,7 +1,16 @@
 # Teladoc Interview
 # Minesweeper game
-#
-
+# Co-ordinates of the bombs in the matrix is provided
+# Each neighbor of the Bomb gets a 1 point, neighbor shares a edge or corner
+# Find the scores of each cell/square in the matrix
+# Mark the bomb cell with Letter 'B', other cells display their respective scores
+# Input to be Function are
+# N -> Number of rows and columns, R->Row coordinates of Bombs, C-> Column coordinates of Bombs
+# N = 3, R = [2, 0, 1, 2], C = [0, 1, 2, 2]
+# Output should be
+# 1B2
+# 24B
+# B3B
 from collections import defaultdict
 
 b_dict = defaultdict(int)
@@ -20,12 +29,12 @@ def matrix(N, R, C):
     return dict(b_dict)
 
 if __name__ == "__main__":
-    #N = 3
-    #R = [2, 0, 1, 2]
-    #C = [0, 1, 2, 2]
-    N = 5
-    R = [1, 2, 3, 1, 3, 1, 2, 3]
-    C = [1, 1, 1, 2, 2, 3, 3, 3]
+    N = 3
+    R = [2, 0, 1, 2]
+    C = [0, 1, 2, 2]
+    #N = 5
+    #R = [1, 2, 3, 1, 3, 1, 2, 3]
+    #C = [1, 1, 1, 2, 2, 3, 3, 3]
     d = matrix(N, R, C)
     print(d)
     for x in range(N):
