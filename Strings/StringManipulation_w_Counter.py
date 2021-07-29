@@ -2,6 +2,7 @@ from collections import Counter
 from string import punctuation, whitespace
 import sys
 import re
+from pathlib import Path
 
 
 def most_common_str(s, n=None):
@@ -34,7 +35,9 @@ if __name__ == "__main__":
     try:
         file = sys.argv[1]
     except IndexError:
-        file = 'files/harry.txt'
+        p_path = Path.cwd().parent
+        f_path = p_path/'data_files/harry.txt'
+        file = f_path
 
     with open(file, encoding='utf8') as f:
         common_words = most_common_str(f.read(), n=20)
