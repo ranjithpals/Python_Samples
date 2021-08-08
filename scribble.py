@@ -43,3 +43,15 @@ print(lst_out)
 
 l = map(lambda x: sorted(x, key=len, reverse=True)[0], cars.values())
 print(list(l))
+
+l = [1, 2, 4, -5, -7, 3, 1, -7]
+
+t = set(l)
+print(list(t)[-1])
+print(len(t))
+t = list(t)
+t.sort()
+print(t)
+
+for i in range(9):
+    print(i)
