@@ -6,11 +6,12 @@ def csv_read(loc):
         yield ln
 
 
-first = csv_read(os.path.dirname(__file__)+'/data_files/filegen.txt')
+first = csv_read("C:/Users/Owner/Documents/Trendy_Tech/Week-13/Datasets/bigLogNew.txt")
+## csv_read(os.path.dirname(__file__)+'/data_files/filegen.txt')
 
-print(next(first))
-print(next(first))
-print(next(first))
+for i in range(10):
+    print(next(first))
+
 # print(next(first))
 # print(next(first))
 
