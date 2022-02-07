@@ -4,40 +4,41 @@ class Node:                         # Class for creating a Node
         self.next = None            # Node attached to this node
 
 
+# Circular Linked List A -> B -> C -> D -> A, the last node is connected back to the Head
 class CircularLinkedList:           # Class for creating a Circular Linked List
     def __init__(self):
-        self.head = None            # Assign empty Node to the Head Node of the CLL
+        self.head = None            # Assign empty Node to the Head (Node) of the CLL
 
-    def append(self, data):         # To Append a new node with a given value (data)
+    def append(self, data):         # To Append a new node with a given value (data) to the end
         node = Node(data)           # Create a New Node with given value
-        if self.head is None:       # Check if the
-            self.head = node
-            self.head.next = self.head
+        if self.head is None:       # Check if the Head is empty, if Yes
+            self.head = node        # Assign new node to Head
+            self.head.next = self.head  # Create circular reference to the head node
             return
-        curr = self.head
-        while curr.next != self.head:
-            curr = curr.next
-        curr.next = node
-        node.next = self.head
+        curr = self.head            # Assigning the Head to curr variable
+        while curr.next != self.head:   # Check if the next Node is same as head, if so has reached the last node
+            curr = curr.next        # Until it has not reached, traverse to the next Node
+        curr.next = node            # Adding the new node to be the node following the last node of the CLL
+        node.next = self.head       # Assigning the Head node as the node next to the new node added
 
-    def print_list(self):
-        curr = self.head
-        print(curr.data)
-        while curr.next != self.head:
-            print(curr.next.data)
-            curr = curr.next
+    def print_list(self):           # Print the nodes of the CLL
+        curr = self.head            # Assigning the Head to curr variable
+        print(curr.data)            # Print the curr node data
+        while curr.next != self.head:   # Check if the next Node is same as head, if so has reached the last node
+            print(curr.next.data)   # Print the curr node data
+            curr = curr.next        # Traverse to the next node
 
-    def prepend(self, data):
-        node = Node(data)
-        curr = self.head
-        node.next = curr
-        if curr is None:
-            self.head = node
-            return
-        while curr.next != self.head:
-            curr = curr.next
-        curr.next = node
-        self.head = node
+    def prepend(self, data):        # Add a new node before the head of the CLL
+        node = Node(data)           # Create a new node
+        curr = self.head            # Assigning the Head to curr variable
+        node.next = curr            # Assigning new node's next node as head
+        if curr is None:            # Need to connect last node to make it circular
+            self.head = node        # If curr node is None, then new node becomes head
+            return                  # End the function
+        while curr.next != self.head:   # Check if the next Node is same as head, if so has reached the last node
+            curr = curr.next        # Traverse to the next node
+        curr.next = node            # Last Node linked to new node
+        self.head = node            # New Node is the head
 
     def remove(self, key):
         curr = self.head
@@ -74,46 +75,42 @@ class CircularLinkedList:           # Class for creating a Circular Linked List
         return count
 
 
-    def split_1(self, sp_no):
-        # Find the length of the CLL
-        split_no = 0
-        len_cll = len(self)
-        split_no = len_cll // sp_no
-        if sp_no >= len_cll:
-            print('Provide a valid split number')
-            return
-        prev = None
-        curr = self.head
-        count = 0
+    def split(self, sp_no):         # Split the CLL into number of CLL's based on the given input
+        len_cll = len(self)         # Find the length of the original CLL
+        split_no = len_cll // sp_no     # Find the length of the split the CLL's
+        if sp_no >= len_cll:        # Check if the length of the split is greater than the original split
+            print('Provide a valid split number')   # Not a valid split
+            return                  # End the function
+        prev = None                 # Variable to capture the node previous to the current node
+        curr = self.head            # Assign Head to current node
+        count = 0                   # Count the number of nodes traversed
         # Truncate the existing CLL (self)
-        while curr and count < split_no:
-            prev = curr
-            count += 1
-            curr = curr.next
-        prev.next = self.head
-
+        while curr and count < split_no:    # Check if the next Node is same as head, if so has reached the last node
+            prev = curr             # Assign curr (current) node to Prev before assigning next node to curr
+            count += 1              # Increase the count of nodes
+            curr = curr.next        # Traverse to the next node
+        prev.next = self.head       # Current node (end of first new CLL) linked to head node
         # Create a New CLL
-        cll_1 = CircularLinkedList()
-        while curr.next != self.head:
-            cll_1.append(curr.data)
-            curr = curr.next
-        cll_1.append(curr.data)
+        cll_1 = CircularLinkedList()    # Create New CLL
+        while curr.next != self.head:   # Check if the next Node is same as head, if so has reached the last node
+            cll_1.append(curr.data)     # Append next node (after last CLL node) to the new CLL
+            curr = curr.next            # Traverse to the next node
+        cll_1.append(curr.data)         # Append the last node to the new CLL
+        return cll_1                    # return the new CLL
 
-        return cll_1
-
-    def josephus_problem(self, step):
-        # check if length of CLL is greater than 1
+    def josephus_problem(self, step):   # Delete the node on which the control lands after n steps from the head
+        # Keep deleting the nodes till we have only one node remaining
         curr = self.head
-        prev = None
-        while len(self) > 1:
-            count = 1
-            while count <= step:
-                prev = curr
-                curr = curr.next
-                count += 1
-            prev.next = curr.next
-            curr = curr.next
-            # curr = None
+        prev = None                 # Assign Head to current node
+        while len(self) > 1:        # check if length of CLL is greater than 1
+            count = 1               # counter for number of steps
+            while count <= step:    # Check if number of steps is lesser than counter
+                prev = curr         # Assign curr (current) node to Prev before assigning next node to curr
+                curr = curr.next    # Traverse to the next node
+                count += 1          # Increase the counter by 1
+            prev.next = curr.next   # Assign the next node of prev to node after current (curr)
+            curr = curr.next        # Traverse to the next node (node next to current)
+
 
 
 
