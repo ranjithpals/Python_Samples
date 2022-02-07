@@ -7,38 +7,39 @@ class Node:
         self.next = other
 
 
-class LinkedList:
-    def __init__(self):
+class LinkedList:                   # Create a New Linked List
+    def __init__(self):             # Create a Null head
         self.head = None
 
-    def append(self, data):
-        new_node = Node(data)
-        if self.head is None:
-            self.head = new_node
-            return
-        last_node = self.head
-        while last_node.next:
-            last_node = last_node.next
-        last_node.next = new_node
+    def append(self, data):         # Append a new Node to the Linked List LL
+        new_node = Node(data)       # Create a New Node
+        if self.head is None:       # If Head node of LL is Null
+            self.head = new_node    # Head node is New Node
+            return                  # Function return
+        last_node = self.head       # last node is head node
+        while last_node.next:       # Check if next node is available
+            last_node = last_node.next  # Traverse to the next node
+        last_node.next = new_node   # Assign new node to follow the last node of LL
 
-    def prepend(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+    def prepend(self, data):        # Prepend the node
+        new_node = Node(data)       # Create a New Node with data value
+        new_node.next = self.head   # Assign new node's next to Head Node
+        self.head = new_node        # Head node of LL is new Node
 
-    def print_list(self):
+    def print_list(self):           # Print the list of nodes of LL
         curr_node = self.head
         while curr_node:
             print(curr_node.data)
             curr_node = curr_node.next
 
-    def insert_after_node(self, prev_node, data):
-        if not prev_node:
+    def insert_after_node(self, prev_node, data):   # Insert the new node after given node
+        if not prev_node:                           # Check if the given node exists
             print("Prev Node is not available")
             return
-        new_node = Node(data)
-        new_node.next = prev_node.next
-        prev_node.next = new_node
+        new_node = Node(data)                       # Create New node
+        new_node.next = prev_node.next  # New nodes next is assigned to given node next
+        # this is so that we do not loose the link to the Node next to the new node
+        prev_node.next = new_node       # given nodes next is assigned to New Node
 
     def delete_node(self, delete_node):
         if not delete_node:
