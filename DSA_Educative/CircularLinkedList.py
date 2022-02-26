@@ -92,16 +92,20 @@ class CircularLinkedList:           # Class for creating a Circular Linked List
         prev.next = self.head       # Current node (end of first new CLL) linked to head node
         # Create a New CLL
         cll_1 = CircularLinkedList()    # Create New CLL
+        cll_head = curr                 # Variable to Store the first node of the remaining CLL
         while curr.next != self.head:   # Check if the next Node is same as head, if so has reached the last node
             cll_1.append(curr.data)     # Append next node (after last CLL node) to the new CLL
             curr = curr.next            # Traverse to the next node
-        cll_1.append(curr.data)         # Append the last node to the new CLL
+        # cll_1.append(curr.data)         # Append the last node to the new CLL
+        curr.next = cll_head            # Assign last node's next to first node of cll_1
+        cll_1.head = curr.next          # Assign first node of cll_1 as cll_1.head node
         return cll_1                    # return the new CLL
 
-    def josephus_problem(self, step):   # Delete the node on which the control lands after n steps from the head
+    # Delete the node on which the control lands after n steps from the head
+    def josephus_problem(self, step):
         # Keep deleting the nodes till we have only one node remaining
-        curr = self.head
-        prev = None                 # Assign Head to current node
+        curr = self.head            # Assign Head to current node
+        prev = None                 # Variable to capture the previous node
         while len(self) > 1:        # check if length of CLL is greater than 1
             count = 1               # counter for number of steps
             while count <= step:    # Check if number of steps is lesser than counter
@@ -110,9 +114,6 @@ class CircularLinkedList:           # Class for creating a Circular Linked List
                 count += 1          # Increase the counter by 1
             prev.next = curr.next   # Assign the next node of prev to node after current (curr)
             curr = curr.next        # Traverse to the next node (node next to current)
-
-
-
 
 
 cll = CircularLinkedList()
@@ -133,16 +134,16 @@ cll.append(2)
 cll.print_list()
 
 
-cll.josephus_problem(2)
-print(f'Circular LL after solving the Josephs Problem')
-cll.print_list()
+# cll.josephus_problem(2)
+# print(f'Circular LL after solving the Josephs Problem')
+# cll.print_list()
 
-'''
-c1 = cll.split_1(2)
+
+c1 = cll.split(2)
 print('First Split Circular LinkedList')
 cll.print_list()
 print('Second Split Circular LinkedList')
 c1.print_list()
-'''
+
 
 
