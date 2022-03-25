@@ -55,3 +55,18 @@ print(t)
 
 for i in range(9):
     print(i)
+
+# No of Friends
+lst = [('A', 'B'), ('B', 'C'), ('C', 'D'), ('C', 'A'), ('E')]
+
+from collections import defaultdict
+from collections import Counter
+
+de_d = defaultdict(int)
+
+for d in lst:
+    de_d[d[0]]+=1
+    if len(d)>1: de_d[d[1]]+=1
+
+print(dict(de_d))
+print(Counter(lst))
