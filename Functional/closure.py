@@ -2,9 +2,7 @@ def make_print(x):
 
     def printx():
         print(x)
-
     return printx
-
 
 f = make_print(7)
 f()
@@ -15,7 +13,6 @@ def support_brackets(start, end):
 
     def add_brackets(x):
         print(start + str(x) + end)
-
     return add_brackets
 
 
@@ -29,7 +26,6 @@ def add():
     def inner(x):
         x=x+1
         return x
-
     return inner
 
 
